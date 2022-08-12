@@ -31,7 +31,6 @@ public class AuthDialogContext : DialogContext<AuthDialogContext>
         }
         catch (Exception e)
         {
-
             e.ShowAsMessageBox();
         }
 

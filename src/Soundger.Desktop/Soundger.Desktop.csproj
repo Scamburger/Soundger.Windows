@@ -10,7 +10,7 @@
 
   <ItemGroup>
     <PackageReference Include="Autofac" Version="6.4.0" />
-    <PackageReference Include="bubuntoid.EasyDialog" Version="6.0.1" />
+    <PackageReference Include="bubuntoid.EasyDialog" Version="7.0.0" />
     <PackageReference Include="bubuntoid.EasyDialog.MetroFramework" Version="6.0.1" />
     <PackageReference Include="MaterialSkin.NET5" Version="1.0.1" />
     <PackageReference Include="NAudio" Version="2.1.0" />

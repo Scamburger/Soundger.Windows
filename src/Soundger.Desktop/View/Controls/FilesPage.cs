@@ -86,12 +86,17 @@ namespace Soundger.Desktop.View.Controls
             CurrentControls.ForEach(s => s.Dispose());
             CurrentControls.Clear();
             // Process the list of files found in the directory.
-            string[] fileEntries = Directory.GetFiles(Directory.GetCurrentDirectory(), "*.mp3");
+            var fileEntries = new List<string>();
+            foreach(var path in SoundgerApplication.Config.MusicDirectories)
+            {
+                fileEntries.AddRange(Directory.GetFiles(path, "*.mp3"));
+            }
+
             foreach (string fileName in fileEntries)
             {
                 var control = new TrackItemControl(new MusicPlayer.Track()
                 {
-                    Name = Path.GetFileName(fileName),
+                    Name = Path.GetFileNameWithoutExtension(fileName),
                     Source = fileName,
                 })
                 {

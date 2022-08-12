@@ -20,7 +20,7 @@ internal static class ConfigurationManager
         }
 
         var content = await File.ReadAllTextAsync(path);
-        return JsonSerializer.Deserialize<Config>(content);
+        return JsonSerializer.Deserialize<Config>(content)!;
     }
 
     public static async Task SaveConfigAsync(Config config)
@@ -40,7 +40,9 @@ internal static class ConfigurationManager
 
         public string? Token { get; set; } = null;
 
-        public HashSet<string> MusicDirectories { get; private set; } = new HashSet<string>();
+        public HashSet<string> MusicDirectories { get; set; } = new HashSet<string>();
+
+        public bool SyncEnabled { get; set; } = false;
 
         public Config()
         {
@@ -51,6 +53,8 @@ internal static class ConfigurationManager
         {
             Endpoint = "http://localhost:9991/",
             MusicDirectories = new string[] { Environment.GetFolderPath(Environment.SpecialFolder.MyMusic) }.ToHashSet(),
+            Token = null,
+            SyncEnabled = false,
         };
     }
 }

@@ -35,23 +35,23 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
             this.panel11 = new System.Windows.Forms.Panel();
+            this.saveButton = new System.Windows.Forms.Button();
             this.panel10 = new System.Windows.Forms.Panel();
             this.panel9 = new System.Windows.Forms.Panel();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.syncCheckBox = new System.Windows.Forms.CheckBox();
             this.panel6 = new System.Windows.Forms.Panel();
-            this.metroButton2 = new MetroFramework.Controls.MetroButton();
+            this.deleteDirectoryButton = new MetroFramework.Controls.MetroButton();
             this.panel7 = new System.Windows.Forms.Panel();
-            this.metroButton1 = new MetroFramework.Controls.MetroButton();
-            this.listBox1 = new System.Windows.Forms.ListBox();
+            this.addDirectoryButton = new MetroFramework.Controls.MetroButton();
+            this.directoriesListBox = new System.Windows.Forms.ListBox();
             this.panel5 = new System.Windows.Forms.Panel();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.endpointTextBox = new System.Windows.Forms.TextBox();
             this.panel3 = new System.Windows.Forms.Panel();
             this.label4 = new System.Windows.Forms.Label();
             this.panel8 = new System.Windows.Forms.Panel();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.headerPanel = new System.Windows.Forms.Panel();
-            this.button1 = new System.Windows.Forms.Button();
             this.mainPanel.SuspendLayout();
             this.panel1.SuspendLayout();
             this.pagePanel.SuspendLayout();
@@ -121,9 +121,9 @@
             this.panel4.Controls.Add(this.panel10);
             this.panel4.Controls.Add(this.panel9);
             this.panel4.Controls.Add(this.panel6);
-            this.panel4.Controls.Add(this.listBox1);
+            this.panel4.Controls.Add(this.directoriesListBox);
             this.panel4.Controls.Add(this.panel5);
-            this.panel4.Controls.Add(this.textBox1);
+            this.panel4.Controls.Add(this.endpointTextBox);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel4.Location = new System.Drawing.Point(162, 0);
             this.panel4.Name = "panel4";
@@ -133,90 +133,103 @@
             // 
             // panel11
             // 
-            this.panel11.Controls.Add(this.button1);
+            this.panel11.Controls.Add(this.saveButton);
             this.panel11.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel11.Location = new System.Drawing.Point(0, 445);
+            this.panel11.Location = new System.Drawing.Point(0, 464);
             this.panel11.Name = "panel11";
             this.panel11.Size = new System.Drawing.Size(608, 31);
             this.panel11.TabIndex = 6;
             // 
+            // saveButton
+            // 
+            this.saveButton.Dock = System.Windows.Forms.DockStyle.Right;
+            this.saveButton.Location = new System.Drawing.Point(532, 0);
+            this.saveButton.Name = "saveButton";
+            this.saveButton.Size = new System.Drawing.Size(76, 31);
+            this.saveButton.TabIndex = 0;
+            this.saveButton.Text = "Save";
+            this.saveButton.UseVisualStyleBackColor = true;
+            this.saveButton.Click += new System.EventHandler(this.saveButton_Click);
+            // 
             // panel10
             // 
             this.panel10.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel10.Location = new System.Drawing.Point(0, 315);
+            this.panel10.Location = new System.Drawing.Point(0, 334);
             this.panel10.Name = "panel10";
             this.panel10.Size = new System.Drawing.Size(608, 130);
             this.panel10.TabIndex = 5;
             // 
             // panel9
             // 
-            this.panel9.Controls.Add(this.checkBox1);
+            this.panel9.Controls.Add(this.syncCheckBox);
             this.panel9.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel9.Location = new System.Drawing.Point(0, 275);
+            this.panel9.Location = new System.Drawing.Point(0, 294);
             this.panel9.Name = "panel9";
             this.panel9.Padding = new System.Windows.Forms.Padding(10, 10, 0, 0);
             this.panel9.Size = new System.Drawing.Size(608, 40);
             this.panel9.TabIndex = 4;
             // 
-            // checkBox1
+            // syncCheckBox
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Dock = System.Windows.Forms.DockStyle.Left;
-            this.checkBox1.Location = new System.Drawing.Point(10, 10);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(15, 30);
-            this.checkBox1.TabIndex = 0;
-            this.checkBox1.UseVisualStyleBackColor = true;
+            this.syncCheckBox.AutoSize = true;
+            this.syncCheckBox.Dock = System.Windows.Forms.DockStyle.Left;
+            this.syncCheckBox.Location = new System.Drawing.Point(10, 10);
+            this.syncCheckBox.Name = "syncCheckBox";
+            this.syncCheckBox.Size = new System.Drawing.Size(15, 30);
+            this.syncCheckBox.TabIndex = 0;
+            this.syncCheckBox.UseVisualStyleBackColor = true;
             // 
             // panel6
             // 
-            this.panel6.Controls.Add(this.metroButton2);
+            this.panel6.Controls.Add(this.deleteDirectoryButton);
             this.panel6.Controls.Add(this.panel7);
-            this.panel6.Controls.Add(this.metroButton1);
+            this.panel6.Controls.Add(this.addDirectoryButton);
             this.panel6.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel6.Location = new System.Drawing.Point(0, 235);
             this.panel6.Name = "panel6";
-            this.panel6.Padding = new System.Windows.Forms.Padding(0, 10, 0, 0);
-            this.panel6.Size = new System.Drawing.Size(608, 40);
+            this.panel6.Padding = new System.Windows.Forms.Padding(0, 10, 0, 15);
+            this.panel6.Size = new System.Drawing.Size(608, 59);
             this.panel6.TabIndex = 3;
             // 
-            // metroButton2
+            // deleteDirectoryButton
             // 
-            this.metroButton2.Dock = System.Windows.Forms.DockStyle.Left;
-            this.metroButton2.Font = new System.Drawing.Font("Segoe UI", 72F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.metroButton2.Location = new System.Drawing.Point(44, 10);
-            this.metroButton2.Name = "metroButton2";
-            this.metroButton2.Size = new System.Drawing.Size(34, 30);
-            this.metroButton2.TabIndex = 2;
-            this.metroButton2.Text = "-";
+            this.deleteDirectoryButton.Dock = System.Windows.Forms.DockStyle.Left;
+            this.deleteDirectoryButton.Font = new System.Drawing.Font("Segoe UI", 72F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.deleteDirectoryButton.Location = new System.Drawing.Point(44, 10);
+            this.deleteDirectoryButton.Name = "deleteDirectoryButton";
+            this.deleteDirectoryButton.Size = new System.Drawing.Size(34, 34);
+            this.deleteDirectoryButton.TabIndex = 2;
+            this.deleteDirectoryButton.Text = "-";
+            this.deleteDirectoryButton.Click += new System.EventHandler(this.deleteDirectoryButton_Click);
             // 
             // panel7
             // 
             this.panel7.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel7.Location = new System.Drawing.Point(34, 10);
             this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(10, 30);
+            this.panel7.Size = new System.Drawing.Size(10, 34);
             this.panel7.TabIndex = 1;
             // 
-            // metroButton1
+            // addDirectoryButton
             // 
-            this.metroButton1.Dock = System.Windows.Forms.DockStyle.Left;
-            this.metroButton1.Font = new System.Drawing.Font("Segoe UI", 72F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.metroButton1.Location = new System.Drawing.Point(0, 10);
-            this.metroButton1.Name = "metroButton1";
-            this.metroButton1.Size = new System.Drawing.Size(34, 30);
-            this.metroButton1.TabIndex = 0;
-            this.metroButton1.Text = "+";
+            this.addDirectoryButton.Dock = System.Windows.Forms.DockStyle.Left;
+            this.addDirectoryButton.Font = new System.Drawing.Font("Segoe UI", 72F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.addDirectoryButton.Location = new System.Drawing.Point(0, 10);
+            this.addDirectoryButton.Name = "addDirectoryButton";
+            this.addDirectoryButton.Size = new System.Drawing.Size(34, 34);
+            this.addDirectoryButton.TabIndex = 0;
+            this.addDirectoryButton.Text = "+";
+            this.addDirectoryButton.Click += new System.EventHandler(this.addDirectoryButton_Click);
             // 
-            // listBox1
+            // directoriesListBox
             // 
-            this.listBox1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.ItemHeight = 15;
-            this.listBox1.Location = new System.Drawing.Point(0, 66);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(608, 169);
-            this.listBox1.TabIndex = 2;
+            this.directoriesListBox.Dock = System.Windows.Forms.DockStyle.Top;
+            this.directoriesListBox.FormattingEnabled = true;
+            this.directoriesListBox.ItemHeight = 15;
+            this.directoriesListBox.Location = new System.Drawing.Point(0, 66);
+            this.directoriesListBox.Name = "directoriesListBox";
+            this.directoriesListBox.Size = new System.Drawing.Size(608, 169);
+            this.directoriesListBox.TabIndex = 2;
             // 
             // panel5
             // 
@@ -226,13 +239,13 @@
             this.panel5.Size = new System.Drawing.Size(608, 28);
             this.panel5.TabIndex = 1;
             // 
-            // textBox1
+            // endpointTextBox
             // 
-            this.textBox1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.textBox1.Location = new System.Drawing.Point(0, 15);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(608, 23);
-            this.textBox1.TabIndex = 0;
+            this.endpointTextBox.Dock = System.Windows.Forms.DockStyle.Top;
+            this.endpointTextBox.Location = new System.Drawing.Point(0, 15);
+            this.endpointTextBox.Name = "endpointTextBox";
+            this.endpointTextBox.Size = new System.Drawing.Size(608, 23);
+            this.endpointTextBox.TabIndex = 0;
             // 
             // panel3
             // 
@@ -249,7 +262,7 @@
             // label4
             // 
             this.label4.Dock = System.Windows.Forms.DockStyle.Top;
-            this.label4.Location = new System.Drawing.Point(0, 275);
+            this.label4.Location = new System.Drawing.Point(0, 294);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(162, 48);
             this.label4.TabIndex = 3;
@@ -261,7 +274,7 @@
             this.panel8.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel8.Location = new System.Drawing.Point(0, 96);
             this.panel8.Name = "panel8";
-            this.panel8.Size = new System.Drawing.Size(162, 179);
+            this.panel8.Size = new System.Drawing.Size(162, 198);
             this.panel8.TabIndex = 2;
             // 
             // label3
@@ -293,16 +306,6 @@
             this.headerPanel.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.headerPanel.Size = new System.Drawing.Size(850, 90);
             this.headerPanel.TabIndex = 4;
-            // 
-            // button1
-            // 
-            this.button1.Dock = System.Windows.Forms.DockStyle.Right;
-            this.button1.Location = new System.Drawing.Point(532, 0);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(76, 31);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "Save";
-            this.button1.UseVisualStyleBackColor = true;
             // 
             // SettingsPage
             // 
@@ -338,21 +341,21 @@
         private Panel panel2;
         private Panel panel4;
         private Panel panel6;
-        private MetroFramework.Controls.MetroButton metroButton2;
+        private MetroFramework.Controls.MetroButton deleteDirectoryButton;
         private Panel panel7;
-        private MetroFramework.Controls.MetroButton metroButton1;
-        private ListBox listBox1;
+        private MetroFramework.Controls.MetroButton addDirectoryButton;
+        private ListBox directoriesListBox;
         private Panel panel5;
-        private TextBox textBox1;
+        private TextBox endpointTextBox;
         private Panel panel3;
         private Label label3;
         private Label label2;
         private Label label4;
         private Panel panel8;
         private Panel panel9;
-        private CheckBox checkBox1;
+        private CheckBox syncCheckBox;
         private Panel panel11;
         private Panel panel10;
-        private Button button1;
+        private Button saveButton;
     }
 }

@@ -71,7 +71,7 @@
             // 
             // signOutButton
             // 
-            this.signOutButton.Location = new System.Drawing.Point(13, 13);
+            this.signOutButton.Location = new System.Drawing.Point(15, 463);
             this.signOutButton.Name = "signOutButton";
             this.signOutButton.Size = new System.Drawing.Size(150, 32);
             this.signOutButton.TabIndex = 0;
