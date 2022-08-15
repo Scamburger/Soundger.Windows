@@ -33,7 +33,7 @@
             this.filesMainPanel = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.materialSingleLineTextField1 = new MaterialSkin.Controls.MaterialSingleLineTextField();
+            this.searchTextBox = new MaterialSkin.Controls.MaterialSingleLineTextField();
             this.label1 = new System.Windows.Forms.Label();
             this.mainPanel = new System.Windows.Forms.Panel();
             this.headerPanel = new System.Windows.Forms.Panel();
@@ -76,30 +76,31 @@
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.materialSingleLineTextField1);
+            this.panel1.Controls.Add(this.searchTextBox);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(730, 37);
             this.panel1.TabIndex = 1;
             // 
-            // materialSingleLineTextField1
+            // searchTextBox
             // 
-            this.materialSingleLineTextField1.Depth = 0;
-            this.materialSingleLineTextField1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.materialSingleLineTextField1.Hint = "Search";
-            this.materialSingleLineTextField1.Location = new System.Drawing.Point(0, 0);
-            this.materialSingleLineTextField1.MaxLength = 32767;
-            this.materialSingleLineTextField1.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialSingleLineTextField1.Name = "materialSingleLineTextField1";
-            this.materialSingleLineTextField1.PasswordChar = '\0';
-            this.materialSingleLineTextField1.SelectedText = "";
-            this.materialSingleLineTextField1.SelectionLength = 0;
-            this.materialSingleLineTextField1.SelectionStart = 0;
-            this.materialSingleLineTextField1.Size = new System.Drawing.Size(730, 23);
-            this.materialSingleLineTextField1.TabIndex = 0;
-            this.materialSingleLineTextField1.TabStop = false;
-            this.materialSingleLineTextField1.UseSystemPasswordChar = false;
+            this.searchTextBox.Depth = 0;
+            this.searchTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.searchTextBox.Hint = "Search";
+            this.searchTextBox.Location = new System.Drawing.Point(0, 0);
+            this.searchTextBox.MaxLength = 32767;
+            this.searchTextBox.MouseState = MaterialSkin.MouseState.HOVER;
+            this.searchTextBox.Name = "searchTextBox";
+            this.searchTextBox.PasswordChar = '\0';
+            this.searchTextBox.SelectedText = "";
+            this.searchTextBox.SelectionLength = 0;
+            this.searchTextBox.SelectionStart = 0;
+            this.searchTextBox.Size = new System.Drawing.Size(730, 23);
+            this.searchTextBox.TabIndex = 0;
+            this.searchTextBox.TabStop = false;
+            this.searchTextBox.UseSystemPasswordChar = false;
+            this.searchTextBox.TextChanged += new System.EventHandler(this.searchTextBox_TextChanged);
             // 
             // label1
             // 
@@ -165,7 +166,7 @@
         private Panel headerPanel;
         private Panel panel2;
         private Panel panel1;
-        private MaterialSkin.Controls.MaterialSingleLineTextField materialSingleLineTextField1;
+        private MaterialSkin.Controls.MaterialSingleLineTextField searchTextBox;
         private Panel filesMainPanel;
         private System.Windows.Forms.Timer timer1;
     }

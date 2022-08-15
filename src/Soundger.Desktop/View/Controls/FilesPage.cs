@@ -28,6 +28,8 @@ namespace Soundger.Desktop.View.Controls
             // this.VerticalScroll.LargeChange = 2;
 
             this.Disposed += FilesPage_Disposed;
+
+            SoundgerApplication.PlayKeyDownIgnoredControls.Add(searchTextBox.Name);
         }
 
         private void FilesPage_Disposed(object? sender, EventArgs e)
@@ -141,8 +143,19 @@ namespace Soundger.Desktop.View.Controls
 
         private async void FilesPage_Load(object sender, EventArgs e)
         {
-            
             await ProcessDirectoryAsync();
         }
+
+        private void searchTextBox_TextChanged(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(searchTextBox.Text))
+            {
+                CurrentControls.ForEach(s => s.Visible = true);
+                return;
+            }
+
+            CurrentControls.ForEach(s => s.Visible = s.Track.Name.ToLower().Contains(searchTextBox.Text.ToLower()));
+        }
+
     }
 }

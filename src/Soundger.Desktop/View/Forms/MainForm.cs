@@ -22,7 +22,6 @@ public partial class MainForm : Form
 
         MusicPlayer.Playlist.Add(new MusicPlayer.Track() { Name = "Random shit from internet", 
             Source = "http://media.ch9.ms/ch9/2876/fd36ef30-cfd2-4558-8412-3cf7a0852876/AzureWebJobs103.mp3" });
-        MusicPlayer.Playlist.Add(new MusicPlayer.Track() { Name = "21 Savage - a lot (Official Video) ft. J. Cole", Source = "file.mp3" });
         MusicPlayer.SetCurrentTack(0);
 
         AudioButtonHandler.PlayPictureBoxControl = playPb;
@@ -122,6 +121,12 @@ public partial class MainForm : Form
     {
         if (e.KeyCode == Keys.Space)
         {
+            var focusedControl = FindFocusedControl(this);
+            if (SoundgerApplication.PlayKeyDownIgnoredControls.Contains(focusedControl?.Parent?.Name))
+            {
+                return;
+            }
+
             playPb.Image = MusicPlayer.IsCurrentlyPlaying ? Properties.Resources.stop : Properties.Resources.play; 
 
             if (!MusicPlayer.IsCurrentlyPlaying)
@@ -212,13 +217,24 @@ public partial class MainForm : Form
         CollapseMenu();
     }
 
+    public static Control FindFocusedControl(Control control)
+    {
+        var container = control as IContainerControl;
+        while (container != null)
+        {
+            control = container.ActiveControl;
+            container = control as IContainerControl;
+        }
+        return control;
+    }
+
     private void timer1_Tick(object sender, EventArgs e)
     {
         playPb.Image = MusicPlayer.IsCurrentlyPlaying ? Properties.Resources.stop : Properties.Resources.play;
-
-        this.Text = MusicPlayer.CurrectTrack.Name;
+            
+        // this.Text = MusicPlayer.CurrectTrack.Name;
         trackNameLabel.Text = MusicPlayer.CurrectTrack.Name;
-        trackPanel.Size = new Size(trackNameLabel.Width + 65, trackPanel.Height);
+        trackPanel.Size = new Size(Math.Max(trackNameLabel.Width, albumLabel.Width) + 65, trackPanel.Height);
         trackBar.Maximum = (int)MusicPlayer.GetTotal().TotalMilliseconds + 50;
 
         if (!clicked)

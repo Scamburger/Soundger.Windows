@@ -13,4 +13,6 @@ internal class SoundgerApplication
     public static CurrentUser CurrentUser { get; set; }
 
     public static Theme Theme { get; set; } = Theme.Light;
+
+    public static ICollection<string> PlayKeyDownIgnoredControls { get; } = new HashSet<string>();
 }

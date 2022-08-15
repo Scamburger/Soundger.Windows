@@ -31,7 +31,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.mainPanel = new System.Windows.Forms.Panel();
             this.pagePanel = new System.Windows.Forms.Panel();
-            this.signOutButton = new MetroFramework.Controls.MetroButton();
+            this.button1 = new System.Windows.Forms.Button();
             this.headerPanel = new System.Windows.Forms.Panel();
             this.mainPanel.SuspendLayout();
             this.pagePanel.SuspendLayout();
@@ -62,21 +62,22 @@
             // pagePanel
             // 
             this.pagePanel.AutoScroll = true;
-            this.pagePanel.Controls.Add(this.signOutButton);
+            this.pagePanel.Controls.Add(this.button1);
             this.pagePanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pagePanel.Location = new System.Drawing.Point(40, 20);
             this.pagePanel.Name = "pagePanel";
             this.pagePanel.Size = new System.Drawing.Size(707, 508);
             this.pagePanel.TabIndex = 0;
             // 
-            // signOutButton
+            // button1
             // 
-            this.signOutButton.Location = new System.Drawing.Point(15, 463);
-            this.signOutButton.Name = "signOutButton";
-            this.signOutButton.Size = new System.Drawing.Size(150, 32);
-            this.signOutButton.TabIndex = 0;
-            this.signOutButton.Text = "Sign out";
-            this.signOutButton.Click += new System.EventHandler(this.signoutButton_Click);
+            this.button1.Location = new System.Drawing.Point(18, 13);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(162, 40);
+            this.button1.TabIndex = 0;
+            this.button1.Text = "Sign out";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.signoutButton_Click);
             // 
             // headerPanel
             // 
@@ -111,6 +112,6 @@
         private Panel mainPanel;
         private Panel headerPanel;
         private Panel pagePanel;
-        private MetroFramework.Controls.MetroButton signOutButton;
+        private Button button1;
     }
 }

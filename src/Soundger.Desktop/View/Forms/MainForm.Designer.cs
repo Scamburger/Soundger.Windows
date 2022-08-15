@@ -233,6 +233,7 @@
             this.trackBar.SmallChange = 0;
             this.trackBar.Style = MetroFramework.MetroColorStyle.Yellow;
             this.trackBar.TabIndex = 0;
+            this.trackBar.TabStop = false;
             this.trackBar.Value = 0;
             // 
             // sidePanel

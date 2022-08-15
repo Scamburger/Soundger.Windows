@@ -43,7 +43,7 @@ public class AuthDialogContext : DialogContext<AuthDialogContext>
         builder.HasTitle("Soundger")
             .HasButton("Sign in")
             .HasWidth(444)
-            .UseMetroStyle();
+            .UseDefaultStyle();
 
         builder.Item(s => s.Password)
             .AsTextBox()

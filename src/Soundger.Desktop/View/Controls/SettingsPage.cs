@@ -38,12 +38,17 @@ namespace Soundger.Desktop.View.Controls
 
         private void addDirectoryButton_Click(object sender, EventArgs e)
         {
-            var dialog = new BrowseFolderDialogContext();
-            dialog.ShowDialog();
-
-            if (string.IsNullOrEmpty(dialog.Path.Value) == false && directoriesListBox.Items.Contains(dialog.Path.Value) == false)
+            var path = string.Empty;
+            using var dialog = new FolderBrowserDialog();
+            dialog.ShowNewFolderButton = false;
+            if (dialog.ShowDialog() == DialogResult.OK)
             {
-                directoriesListBox.Items.Add(dialog.Path.Value);
+                path = dialog.SelectedPath;
+            }
+
+            if (string.IsNullOrEmpty(path) == false && directoriesListBox.Items.Contains(path) == false)
+            {
+                directoriesListBox.Items.Add(path);
             }
         }
 
