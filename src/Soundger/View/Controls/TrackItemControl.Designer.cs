@@ -29,15 +29,15 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.panel4 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.menuPb = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.panel4 = new System.Windows.Forms.Panel();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.menuPb)).BeginInit();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -54,9 +54,18 @@
             this.panel1.Size = new System.Drawing.Size(869, 43);
             this.panel1.TabIndex = 0;
             // 
+            // panel4
+            // 
+            this.panel4.Dock = System.Windows.Forms.DockStyle.Right;
+            this.panel4.Location = new System.Drawing.Point(773, 0);
+            this.panel4.Name = "panel4";
+            this.panel4.Padding = new System.Windows.Forms.Padding(10);
+            this.panel4.Size = new System.Drawing.Size(48, 43);
+            this.panel4.TabIndex = 3;
+            // 
             // panel3
             // 
-            this.panel3.Controls.Add(this.pictureBox2);
+            this.panel3.Controls.Add(this.menuPb);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Right;
             this.panel3.Location = new System.Drawing.Point(821, 0);
             this.panel3.Name = "panel3";
@@ -64,17 +73,17 @@
             this.panel3.Size = new System.Drawing.Size(48, 43);
             this.panel3.TabIndex = 2;
             // 
-            // pictureBox2
+            // menuPb
             // 
-            this.pictureBox2.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pictureBox2.Dock = System.Windows.Forms.DockStyle.Left;
-            this.pictureBox2.Image = global::Soundger.Properties.Resources.upload;
-            this.pictureBox2.Location = new System.Drawing.Point(10, 10);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(24, 23);
-            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox2.TabIndex = 0;
-            this.pictureBox2.TabStop = false;
+            this.menuPb.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.menuPb.Dock = System.Windows.Forms.DockStyle.Left;
+            this.menuPb.Image = global::Soundger.Properties.Resources.upload;
+            this.menuPb.Location = new System.Drawing.Point(10, 10);
+            this.menuPb.Name = "menuPb";
+            this.menuPb.Size = new System.Drawing.Size(24, 23);
+            this.menuPb.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.menuPb.TabIndex = 0;
+            this.menuPb.TabStop = false;
             // 
             // label1
             // 
@@ -108,15 +117,6 @@
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             // 
-            // panel4
-            // 
-            this.panel4.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel4.Location = new System.Drawing.Point(773, 0);
-            this.panel4.Name = "panel4";
-            this.panel4.Padding = new System.Windows.Forms.Padding(10);
-            this.panel4.Size = new System.Drawing.Size(48, 43);
-            this.panel4.TabIndex = 3;
-            // 
             // TrackItemControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -126,7 +126,7 @@
             this.Size = new System.Drawing.Size(869, 43);
             this.panel1.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.menuPb)).EndInit();
             this.panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
@@ -140,7 +140,7 @@
         private PictureBox pictureBox1;
         private Label label1;
         private Panel panel3;
-        private PictureBox pictureBox2;
+        private PictureBox menuPb;
         private Panel panel4;
     }
 }

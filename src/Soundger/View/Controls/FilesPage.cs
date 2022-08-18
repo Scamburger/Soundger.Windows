@@ -25,8 +25,8 @@ namespace Soundger.View.Controls
 
         private void FilesPage_Disposed(object? sender, EventArgs e)
         {
-            CurrentControls.ForEach(s => s.Dispose());
-            CurrentControls.Clear();
+            CurrentControls?.ForEach(s => s.Dispose());
+            CurrentControls?.Clear();
             CurrentControls = null;
             GC.Collect();
         }

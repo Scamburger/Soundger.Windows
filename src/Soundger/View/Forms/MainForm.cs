@@ -12,6 +12,8 @@ public partial class MainForm : Form
     private ISoundgerApiClient client;
     private SideMenuItemControl[] menuItems;
     private Component[] pages;
+    private FilesPage filesPage;
+
     bool clicked = false;
 
     public MainForm()
@@ -38,9 +40,8 @@ public partial class MainForm : Form
         profileItem.Active = false;
         profileItem.Custom_OnMouseClick += (s, x) =>
         {
-            DisposeOldForm();
+            DisposePreviousPage();
             SetActiveMenuItem(profileItem);
-            mainPanel.Controls.Clear();
             mainPanel.Controls.Add(new ProfilePage { Dock = DockStyle.Fill, AutoSize = true, AutoScroll = true, });
         };
 
@@ -49,9 +50,8 @@ public partial class MainForm : Form
         mainItem.Label = "Browse";
         mainItem.Custom_OnMouseClick += (s, x) =>
         {
-            DisposeOldForm();
+            DisposePreviousPage();
             SetActiveMenuItem(mainItem);
-            mainPanel.Controls.Clear();
             mainPanel.Controls.Add(new Panel() {  Dock = DockStyle.Fill});
         };
 
@@ -60,9 +60,8 @@ public partial class MainForm : Form
         myItem.Label = "Tracks";
         myItem.Custom_OnMouseClick += (s, x) =>
         {
-            DisposeOldForm();
+            DisposePreviousPage();
             SetActiveMenuItem(myItem);
-            mainPanel.Controls.Clear();
             mainPanel.Controls.Add(new Panel() { Dock = DockStyle.Fill });
         };
 
@@ -71,10 +70,15 @@ public partial class MainForm : Form
         filesItem.Label = "My files";
         filesItem.Custom_OnMouseClick += (s, x) =>
         {
-            DisposeOldForm();
+            DisposePreviousPage();
             SetActiveMenuItem(filesItem);
-            mainPanel.Controls.Clear();
-            mainPanel.Controls.Add(new FilesPage() { Dock = DockStyle.Fill, AutoSize = true });
+            if (filesPage == null)
+            {
+                filesPage = new FilesPage() { Dock = DockStyle.Fill, AutoSize = true };
+                mainPanel.Controls.Add(filesPage);
+            }
+
+            filesPage.Visible = true;
         };
 
         settingsItem.Icon = Properties.Resources.settings;
@@ -82,28 +86,22 @@ public partial class MainForm : Form
         settingsItem.Label = "Settings";
         settingsItem.Custom_OnMouseClick += (s, x) =>
         {
-            DisposeOldForm();
+            DisposePreviousPage();
             SetActiveMenuItem(settingsItem);
-            mainPanel.Controls.Clear();
             var page = new SettingsPage() { Dock = DockStyle.Fill, AutoSize = true, AutoScroll = true, };
             page.VerticalScroll.Enabled = true;
             mainPanel.Controls.Add(page);
         };
 
-        trackBar.Scroll += (s,
-                                e) =>
+        trackBar.Scroll += (s,e) =>
         {
             if (clicked)
                 return;
+
             Console.WriteLine(trackBar.Value);
         };
-        trackBar.MouseDown += (s,
-                                e) =>
-        {
-            clicked = true;
-        };
-        trackBar.MouseUp += (s,
-                                e) =>
+        trackBar.MouseDown += (s, e) => { clicked = true; };
+        trackBar.MouseUp += (s,e) =>
         {
             if (!clicked)
                 return;
@@ -112,15 +110,10 @@ public partial class MainForm : Form
             MusicPlayer.SetPosition(TimeSpan.FromMilliseconds(trackBar.Value));
         };
         trackBar.MouseWheelBarPartitions = int.MaxValue;
-        trackBar.MouseWheel += (s, e) => {
-            ((HandledMouseEventArgs)e).Handled = true;
-        };
-
-        this.KeyPreview = true;
-        this.KeyDown += MainForm_KeyDown;
+        trackBar.MouseWheel += (s, e) => { ((HandledMouseEventArgs)e).Handled = true; };
     }
 
-    private void MainForm_KeyDown(object? sender, KeyEventArgs e)
+    private void MainForm_KeyDown(object sender, KeyEventArgs e)
     {
         if (e.KeyCode == Keys.Space)
         {
@@ -143,10 +136,19 @@ public partial class MainForm : Form
         }
     }
 
-    private void DisposeOldForm()
+    private void DisposePreviousPage()
     {
         if (mainPanel.Controls.Count > 0)
-            mainPanel.Controls[0].Dispose();
+        {
+            if (filesPage != null)
+                filesPage.Visible = false;
+
+            foreach(Control control in mainPanel.Controls)
+            {
+                if (control != filesPage)
+                    control.Dispose();
+            }
+        }
     }
 
     private void SetActiveMenuItem(SideMenuItemControl control)

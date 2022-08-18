@@ -1,4 +1,5 @@
 ﻿using Soundger.Models;
+using Soundger.View.Handlers;
 using static Soundger.MusicPlayer;
 
 namespace Soundger.View.Controls
@@ -17,6 +18,9 @@ namespace Soundger.View.Controls
             var controls = GetAll(this).Append(this).ToList();
             foreach (var control in controls)
             {
+                if (control == menuPb || control == panel3)
+                    continue;
+
                 control.Click += Control_Click;
                 control.MouseDown += Panel_MouseDown;
                 control.MouseUp += Panel_MouseUp;
@@ -53,8 +57,46 @@ namespace Soundger.View.Controls
 
         private void Control_Click(object? sender, EventArgs e)
         {
-            Playlist.Add(Track);
-            SetCurrentTack(Track);
+            if (MusicPlayer.CurrentTrack?.Source == Track.Source)
+            {
+                AudioButtonHandler.PlayPictureBoxControl.Image = !MusicPlayer.IsCurrentlyPlaying 
+                    ? Properties.Resources.stop_highlighted 
+                    : Properties.Resources.play__highlighted_;
+
+                if (!MusicPlayer.IsCurrentlyPlaying)
+                {
+                    MusicPlayer.Play();
+                }
+                else
+                {
+                    MusicPlayer.Stop();
+                }
+
+                return;
+            }
+
+            Playlist.Clear();
+            foreach(var path in SoundgerApplication.Config.MusicDirectories)
+            {
+                var fileEntries = new List<string>();
+                fileEntries.AddRange(Directory.GetFiles(path, "*.mp3"));
+
+                foreach(var fileName in fileEntries)
+                {
+                    var track = new AudioTrack
+                    {
+                        Name = Path.GetFileNameWithoutExtension(fileName),
+                        Source = fileName,
+                    };
+
+                    Playlist.Add(track);
+                }
+
+            }
+
+            Playlist = Playlist.Reverse().ToList();
+            var currentTrack = Playlist.FirstOrDefault(s => s.Source == Track.Source);
+            SetCurrentTack(currentTrack);
             Play();
         }
 
