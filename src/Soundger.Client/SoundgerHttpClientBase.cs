@@ -10,7 +10,7 @@ public abstract class SoundgerHttpClientBase
     private readonly IFlurlClient client;
     private readonly SoundgerApiClientSettings settings;
 
-    public SoundgerHttpClientBase(SoundgerApiClientSettings settings)
+    protected SoundgerHttpClientBase(SoundgerApiClientSettings settings)
     {
         this.settings = settings;
         client = new FlurlClient(settings.Endpoint);
