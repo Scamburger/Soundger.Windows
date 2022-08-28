@@ -31,7 +31,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.mainPanel = new System.Windows.Forms.Panel();
             this.pagePanel = new System.Windows.Forms.Panel();
-            this.button1 = new System.Windows.Forms.Button();
+            this.signInButton = new System.Windows.Forms.Button();
+            this.signOutButton = new System.Windows.Forms.Button();
             this.headerPanel = new System.Windows.Forms.Panel();
             this.mainPanel.SuspendLayout();
             this.pagePanel.SuspendLayout();
@@ -62,22 +63,33 @@
             // pagePanel
             // 
             this.pagePanel.AutoScroll = true;
-            this.pagePanel.Controls.Add(this.button1);
+            this.pagePanel.Controls.Add(this.signInButton);
+            this.pagePanel.Controls.Add(this.signOutButton);
             this.pagePanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pagePanel.Location = new System.Drawing.Point(40, 20);
             this.pagePanel.Name = "pagePanel";
             this.pagePanel.Size = new System.Drawing.Size(707, 508);
             this.pagePanel.TabIndex = 0;
             // 
-            // button1
+            // signInButton
             // 
-            this.button1.Location = new System.Drawing.Point(12, 11);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(103, 33);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "Sign out";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.signoutButton_Click);
+            this.signInButton.Location = new System.Drawing.Point(13, 15);
+            this.signInButton.Name = "signInButton";
+            this.signInButton.Size = new System.Drawing.Size(113, 33);
+            this.signInButton.TabIndex = 1;
+            this.signInButton.Text = "Sign in";
+            this.signInButton.UseVisualStyleBackColor = true;
+            this.signInButton.Click += new System.EventHandler(this.signInButton_Click);
+            // 
+            // signOutButton
+            // 
+            this.signOutButton.Location = new System.Drawing.Point(13, 54);
+            this.signOutButton.Name = "signOutButton";
+            this.signOutButton.Size = new System.Drawing.Size(113, 33);
+            this.signOutButton.TabIndex = 0;
+            this.signOutButton.Text = "Sign out";
+            this.signOutButton.UseVisualStyleBackColor = true;
+            this.signOutButton.Click += new System.EventHandler(this.signoutButton_Click);
             // 
             // headerPanel
             // 
@@ -98,6 +110,7 @@
             this.Controls.Add(this.headerPanel);
             this.Name = "ProfilePage";
             this.Size = new System.Drawing.Size(757, 620);
+            this.Load += new System.EventHandler(this.ProfilePage_Load);
             this.mainPanel.ResumeLayout(false);
             this.pagePanel.ResumeLayout(false);
             this.headerPanel.ResumeLayout(false);
@@ -112,6 +125,7 @@
         private Panel mainPanel;
         private Panel headerPanel;
         private Panel pagePanel;
-        private Button button1;
+        private Button signOutButton;
+        private Button signInButton;
     }
 }

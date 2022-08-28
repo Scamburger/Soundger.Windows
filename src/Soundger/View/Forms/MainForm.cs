@@ -42,7 +42,15 @@ public partial class MainForm : Form
         {
             DisposePreviousPage();
             SetActiveMenuItem(profileItem);
-            mainPanel.Controls.Add(new ProfilePage { Dock = DockStyle.Fill, AutoSize = true, AutoScroll = true, });
+            var control = new ProfilePage { Dock = DockStyle.Fill, AutoSize = true, AutoScroll = true, };
+            control.OnAuthorizedValueChangedEvent += (bool isAuthorized) =>
+            {
+                profileItem.Label = isAuthorized ? SoundgerApplication.CurrentUser.Username : "Profile";
+
+                Text = isAuthorized ? $"Logged in as {SoundgerApplication.CurrentUser.Username} ({SoundgerApplication.CurrentUser.Id})" : "Soundger";
+
+            };
+            mainPanel.Controls.Add(control);
         };
 
         mainItem.Icon = Properties.Resources.browse;
@@ -206,15 +214,42 @@ public partial class MainForm : Form
 
     private async void MainForm_Load(object sender, EventArgs e)
     {
-        var currentUser = await client.AuthApi.GetCurrentUserAsync();
-        SoundgerApplication.CurrentUser.Id = currentUser.Id;
-        SoundgerApplication.CurrentUser.Username = currentUser.Username;
-
-        Text = $"Logged in as {currentUser.Username} ({currentUser.Id})";
-        profileItem.Label = currentUser.Username;
-
         CollapseMenu();
-        CollapseMenu();
+        // CollapseMenu();
+
+        Text = "Soundger";
+        profileItem.Label = "Profile";
+
+        if (SoundgerApplication.Config?.Token != null)
+        {
+            try
+            {
+                SoundgerApplication.CurrentUser = new CurrentUser
+                {
+                    Token = SoundgerApplication.Config.Token
+                };
+
+                var client = SoundgerApplication.Container.Resolve<ISoundgerApiClient>();
+                var currentUser = await client.AuthApi.GetCurrentUserAsync();
+                SoundgerApplication.CurrentUser.Id = currentUser.Id;
+                SoundgerApplication.CurrentUser.Username = currentUser.Username;
+
+                Text = $"Logged in as {currentUser.Username} ({currentUser.Id})";
+                profileItem.Label = currentUser.Username;
+
+                SoundgerApplication.CurrentUser = new CurrentUser
+                {
+                    Id = currentUser.Id,
+                    Token = SoundgerApplication.Config.Token,
+                    Username = currentUser.Username,
+                    IsAuthorized = true,
+                };
+            }
+            catch
+            {
+                SoundgerApplication.CurrentUser = null;
+            }
+        }
     }
 
     private void toggleSideMenuButton_Click(object sender, EventArgs e)

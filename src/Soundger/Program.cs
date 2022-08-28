@@ -13,10 +13,10 @@ internal static class Program
     {
         Initialize();
 
-        if (!Authorize())
-        {
-            return;
-        }
+        // if (!Authorize())
+        // {
+        //     return;
+        // }
 
         var form = new MainForm();
         form.ShowDialog();

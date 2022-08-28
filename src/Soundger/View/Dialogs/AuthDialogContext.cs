@@ -25,7 +25,8 @@ public class AuthDialogContext : DialogContext<AuthDialogContext>
             var response = await client.AuthApi.LoginAsync(Username.Value, Password.Value);
             SoundgerApplication.CurrentUser = new Models.CurrentUser
             {
-                Token = response.Token
+                Token = response.Token,
+                IsAuthorized = true,
             };
             Close();
         }

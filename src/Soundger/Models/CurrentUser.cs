@@ -7,5 +7,7 @@
         public string Username { get; set; }
 
         public int Id { get; set; }
+
+        public bool IsAuthorized { get; set; }
     }
 }
