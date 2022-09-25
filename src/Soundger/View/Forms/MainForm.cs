@@ -12,7 +12,7 @@ public partial class MainForm : Form
     private ISoundgerApiClient client;
     private SideMenuItemControl[] menuItems;
     private Component[] pages;
-    private FilesPage filesPage;
+    public static FilesPage FilesPage;
 
     bool clicked = false;
 
@@ -21,7 +21,7 @@ public partial class MainForm : Form
         InitializeComponent();
         LoadDependencies();
         ApplyTheme();
-
+        
         MusicPlayer.Playlist.Add(new AudioTrack
         {
             Name = "Random shit from internet",
@@ -34,6 +34,7 @@ public partial class MainForm : Form
         new AudioButtonHandler(playPb).Handle();
         new AudioButtonHandler(prevPb).Handle();
 
+        FilesPage = new FilesPage() { Dock = DockStyle.Fill, AutoSize = true };
         menuItems = new[] { profileItem, mainItem, myItem, filesItem, settingsItem};
 
         profileItem.Icon = Properties.Resources.avatar;
@@ -80,13 +81,12 @@ public partial class MainForm : Form
         {
             DisposePreviousPage();
             SetActiveMenuItem(filesItem);
-            if (filesPage == null)
+            if (mainPanel.Controls.Contains(FilesPage) == false)
             {
-                filesPage = new FilesPage() { Dock = DockStyle.Fill, AutoSize = true };
-                mainPanel.Controls.Add(filesPage);
+                mainPanel.Controls.Add(FilesPage);
             }
 
-            filesPage.Visible = true;
+            FilesPage.Visible = true;
         };
 
         settingsItem.Icon = Properties.Resources.settings;
@@ -148,12 +148,12 @@ public partial class MainForm : Form
     {
         if (mainPanel.Controls.Count > 0)
         {
-            if (filesPage != null)
-                filesPage.Visible = false;
+            if (FilesPage != null)
+                FilesPage.Visible = false;
 
             foreach(Control control in mainPanel.Controls)
             {
-                if (control != filesPage)
+                if (control != FilesPage)
                     control.Dispose();
             }
         }
@@ -248,6 +248,9 @@ public partial class MainForm : Form
             catch
             {
                 SoundgerApplication.CurrentUser = null;
+                var config = SoundgerApplication.Config!;
+                config.Token = null;
+                await ConfigurationManager.SaveConfigAsync(config);
             }
         }
     }
