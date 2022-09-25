@@ -87,20 +87,7 @@ namespace Soundger.View.Controls
 
             foreach (string fileName in fileEntries)
             {
-                var control = new TrackItemControl(new AudioTrack
-                {
-                    Name = Path.GetFileNameWithoutExtension(fileName),
-                    Source = fileName,
-                })
-                {
-                    Dock = DockStyle.Top,
-                    Margin = new Padding(10),
-                };
-
-                SetVisible(control);
-                filesMainPanel.Controls.Add(control);
-                CurrentControls.Add(control);
-
+                AddFile(fileName);
                 await Task.Delay(1);
             }
             
@@ -108,13 +95,43 @@ namespace Soundger.View.Controls
             loaded = true;
         }
 
+        public void AddFile(string fileName)
+        {
+            var control = new TrackItemControl(new AudioTrack
+            {
+                Name = Path.GetFileNameWithoutExtension(fileName),
+                Source = fileName,
+            })
+            {
+                Dock = DockStyle.Top,
+                Margin = new Padding(10),
+            };
+
+            SetVisible(control);
+            filesMainPanel.Controls.Add(control);
+            CurrentControls.Add(control);
+        }
+
+        public void RemoveFile(string fileName)
+        {
+            var control = CurrentControls.FirstOrDefault(s => s.Track.Source == fileName);
+            if (control != null)
+            {
+                CurrentControls.Remove(control);
+                filesMainPanel.Controls.Remove(control);
+                control.Dispose();
+            }
+        }
+
         private string lastSourcePlayed;
         private void timer1_Tick(object sender, EventArgs e)
         {
             if (lastSourcePlayed == MusicPlayer.CurrentTrack.Source)
             {
-                var control = CurrentControls.First(s => s.Track.Source == lastSourcePlayed);
-                control.SetPlaying(true);
+                var control = CurrentControls.FirstOrDefault(s => s.Track.Source == lastSourcePlayed);
+                if (control != null)
+                    control.SetPlaying(true);
+
                 return;
             }
 
@@ -148,5 +165,41 @@ namespace Soundger.View.Controls
             CurrentControls.ForEach(s => s.Visible = s.Track.Name.ToLower().Contains(searchTextBox.Text.ToLower()));
         }
 
+
+        private static List<string> LastWatchedFiles = new();
+        private void timer2_Tick(object sender, EventArgs e)
+        {
+            var fileEntries = new List<string>();
+            foreach (var path in SoundgerApplication.Config.MusicDirectories)
+            {
+                fileEntries.AddRange(Directory.GetFiles(path, "*.mp3"));
+            }
+
+            if (LastWatchedFiles.Any() == false)
+            {
+                LastWatchedFiles = fileEntries;
+                return;
+            }
+
+            var newFiles = fileEntries.Where(s => LastWatchedFiles.Contains(s) == false);
+            foreach (var newScannedFile in newFiles)
+            {
+                LastWatchedFiles.Add(newScannedFile);
+                AddFile(newScannedFile);
+            }
+
+            foreach (var lastWatchedFile in LastWatchedFiles.ToList())
+            {
+                if (fileEntries.Contains(lastWatchedFile))
+                {
+                    continue;
+                }
+                else
+                {
+                    RemoveFile(lastWatchedFile);
+                    LastWatchedFiles.Remove(lastWatchedFile);
+                }
+            }
+        }
     }
 }
