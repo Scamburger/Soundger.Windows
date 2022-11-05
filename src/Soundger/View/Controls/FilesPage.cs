@@ -126,11 +126,10 @@ namespace Soundger.View.Controls
         private string lastSourcePlayed;
         private void timer1_Tick(object sender, EventArgs e)
         {
-            if (lastSourcePlayed == MusicPlayer.CurrentTrack.Source)
+            if (lastSourcePlayed == MusicPlayer.CurrentTrack?.Source)
             {
                 var control = CurrentControls.FirstOrDefault(s => s.Track.Source == lastSourcePlayed);
-                if (control != null)
-                    control.SetPlaying(true);
+                control?.SetPlaying(true);
 
                 return;
             }
@@ -167,12 +166,23 @@ namespace Soundger.View.Controls
 
 
         private static List<string> LastWatchedFiles = new();
-        private void timer2_Tick(object sender, EventArgs e)
+        private async void timer2_Tick(object sender, EventArgs e)
         {
             var fileEntries = new List<string>();
-            foreach (var path in SoundgerApplication.Config.MusicDirectories)
+            foreach (var path in SoundgerApplication.Config.MusicDirectories.ToList())
             {
-                fileEntries.AddRange(Directory.GetFiles(path, "*.mp3"));
+                try
+                {
+                    var files = Directory.GetFiles(path, "*.mp3");
+                    fileEntries.AddRange(files);
+                }
+                catch (DirectoryNotFoundException exception)
+                {
+                    var config = SoundgerApplication.Config;
+                    config.MusicDirectories.Remove(path);
+                    await ConfigurationManager.SaveConfigAsync(config);
+                    continue;
+                }
             }
 
             if (LastWatchedFiles.Any() == false)

@@ -22,12 +22,12 @@ public partial class MainForm : Form
         LoadDependencies();
         ApplyTheme();
         
-        MusicPlayer.Playlist.Add(new AudioTrack
-        {
-            Name = "Random shit from internet",
-            Source = "http://media.ch9.ms/ch9/2876/fd36ef30-cfd2-4558-8412-3cf7a0852876/AzureWebJobs103.mp3"
-        });
-        MusicPlayer.SetCurrentTack(0);
+        // MusicPlayer.Playlist.Add(new AudioTrack
+        // {
+        //     Name = "Random shit from internet",
+        //     Source = "http://media.ch9.ms/ch9/2876/fd36ef30-cfd2-4558-8412-3cf7a0852876/AzureWebJobs103.mp3"
+        // });
+        // MusicPlayer.SetCurrentTack(0);
 
         AudioButtonHandler.PlayPictureBoxControl = playPb;
         new AudioButtonHandler(nextPb).Handle();
@@ -276,7 +276,7 @@ public partial class MainForm : Form
         playPb.Image = MusicPlayer.IsCurrentlyPlaying ? Properties.Resources.stop : Properties.Resources.play;
             
         // this.Text = MusicPlayer.CurrectTrack.Name;
-        trackNameLabel.Text = MusicPlayer.CurrentTrack.Name;
+        trackNameLabel.Text = MusicPlayer.CurrentTrack?.Name ?? string.Empty;
         trackPanel.Size = new Size(Math.Max(trackNameLabel.Width, albumLabel.Width) + 65, trackPanel.Height);
         trackBar.Maximum = (int)MusicPlayer.GetTotal().TotalMilliseconds + 50;
 

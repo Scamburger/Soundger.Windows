@@ -6,7 +6,7 @@ namespace Soundger;
 public static class MusicPlayer
 {
     public static ICollection<AudioTrack> Playlist { get; internal set; } = new HashSet<AudioTrack>();
-    public static AudioTrack CurrentTrack => Playlist.ElementAt(CurrentTrackIndex);
+    public static AudioTrack CurrentTrack => Playlist.ElementAtOrDefault(CurrentTrackIndex);
     public static bool IsCurrentlyPlaying { get; private set; }
 
     private static WaveOutEvent Event = new();
